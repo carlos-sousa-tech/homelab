@@ -1,0 +1,68 @@
+#!/bin/bash
+
+set -e
+
+TARGET_USER="csa"
+
+GAMES_MOUNT_POINT="/mnt/games"
+GAMES_UUID="UUID=2941558d-408f-4a75-952e-441839ba53b8"
+GAMES_FILESYSTEM="ext4"
+GAMES_OPTIONS="defaults"
+
+DATA_MOUNT_POINT="/mnt/storage"
+DATA_UUID="UUID=28b6bebf-89ff-44de-9e51-c97e4feb40a5"
+DATA_FILESYSTEM="ext4"
+DATA_OPTIONS="defaults,nofail,noatime"
+
+OSSHARED_MOUNT_POINT="/mnt/osshared"
+OSSHARED_UUID="UUID=12EE9EFA08A175F6"
+OSSHARED_FILESYSTEM="ntfs-3g"
+OSSHARED_OPTIONS="defaults,uid=1000,gid=1000,dmask=022,fmask=133,noatime,nofail"
+
+# Function to create mount point if it doesn't exist
+create_mount_point() {
+    local mount_point="$1"
+    if [ ! -d "$mount_point" ]; then
+        echo "Creating mount point: $mount_point"
+        mkdir -p "$mount_point"
+    else
+        echo "Mount point already exists: $mount_point"
+    fi
+}
+
+# Function to change ownership and permissions
+set_permissions() {
+    local mount_point="$1"
+    echo "Setting permissions for $mount_point"
+    chown "$TARGET_USER:$TARGET_USER" "$mount_point"
+    chmod 755 "$mount_point"
+}
+
+# Function to add entry to fstab
+add_fstab_entry() {
+    local device="$1"
+    local mount_point="$2"
+    local filesystem_type="$3"
+    local mount_options="$4"
+
+    if grep -q "$mount_point" /etc/fstab; then
+        echo "Entry already exists for $mount_point in /etc/fstab"
+    else
+        echo "Adding entry to /etc/fstab"
+        echo "$device $mount_point $filesystem_type $mount_options 0 0" | sudo tee -a /etc/fstab > /dev/null
+    fi
+}
+
+create_mount_point "$GAMES_MOUNT_POINT"
+set_permissions "$GAMES_MOUNT_POINT"
+add_fstab_entry "$GAMES_UUID" "$GAMES_MOUNT_POINT" "$GAMES_FILESYSTEM" "$GAMES_OPTIONS"
+
+create_mount_point "$DATA_MOUNT_POINT"
+set_permissions "$DATA_MOUNT_POINT"
+add_fstab_entry "$DATA_UUID" "$DATA_MOUNT_POINT" "$DATA_FILESYSTEM" "$DATA_OPTIONS"
+
+create_mount_point "$OSSHARED_MOUNT_POINT"
+set_permissions "$OSSHARED_MOUNT_POINT"
+add_fstab_entry "$OSSHARED_UUID" "$OSSHARED_MOUNT_POINT" "$OSSHARED_FILESYSTEM" "$OSSHARED_OPTIONS"
+
+systemctl daemon-reload

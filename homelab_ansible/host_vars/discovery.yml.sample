@@ -1,0 +1,7 @@
+---
+hostname: discovery
+domain_name: intern.carlossousa.tech
+
+docker_networks:
+  - reverse_proxy_network
+

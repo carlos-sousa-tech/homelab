@@ -1,0 +1,31 @@
+---
+
+- name: Configure common settings for all hosts
+  hosts: all
+  become: true
+  roles:
+    - common
+  tags:
+    - common
+    - always
+
+- name: Configure docker hosts
+  hosts: docker_hosts
+  become: true
+  roles:
+    - docker_hosts
+  tags:
+    - docker_hosts
+    - docker
+
+
+- name: Ending Scripts & Cleanup
+  hosts: all
+  become: true
+  roles:
+    - post_execution
+  tags:
+    - always
+    - common
+    - docker
+    - docker_hosts

@@ -1,0 +1,34 @@
+---
+- name: Copy Script Directory
+  copy:
+    src: scripts
+    dest: "/home/{{ docker_main_user }}/"
+    owner: "{{ docker_main_user }}"
+    group: "{{ docker_main_group }}"
+    mode: '0744'
+    directory_mode: '0755'
+  become: true
+
+#- name: Fix Owner and Permissions (directories)
+#  file:
+#    path: "/home/{{ docker_main_user }}"
+#    owner: "{{ docker_main_user }}"
+#    group: "{{ docker_main_group }}"
+#    mode: '0755'
+#    recurse: yes
+#    state: directory
+#
+#- name: Fix Owner and Permissions (files)
+#  find:
+#    path: "/home/{{ docker_main_user }}"
+#    type: f
+#    recurse: yes
+#  register: file_list
+#
+#- name: Apply File Permissions
+#  file:
+#    path: "{{ item.path }}"
+#    owner: "{{ docker_main_user }}"
+#    group: "{{ docker_main_group }}"
+#    mode: '0644'
+#  loop: "{{ file_list.files }}"

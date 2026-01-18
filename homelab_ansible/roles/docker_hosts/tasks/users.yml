@@ -1,0 +1,24 @@
+---
+- name: Create Users
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    groups: "{{ item.groups | join(',') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    home: "{{ item.home | default(omit) }}"
+    createhome: "{{ item.create_home | default(yes) }}"
+    comment: "{{ item.comment | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ users }}"
+  tags:
+    - users
+
+- name: Set Authorized Keys
+  authorized_key:
+    user: "{{ item.0.name }}"
+    key: "{{ item.1 }}"
+    state: present
+  loop: "{{ users | subelements('authorized_keys') }}"
+  tags:
+    - users
+    - ssh-keys

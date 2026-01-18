@@ -1,0 +1,35 @@
+---
+
+- name: Install Required System Packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_system_packages }}"
+
+- name: Remove Old Docker Versions
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ docker_absent_packages }}"
+
+- name: Add Docker GPG apt Key
+  get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+    mode: '0644'
+    force: true
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian {{ debian_codename }} {{ debian_version }}
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: true
+
+- name: Install Docker Packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_packages }}"

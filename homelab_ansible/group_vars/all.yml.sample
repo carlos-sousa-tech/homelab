@@ -1,0 +1,41 @@
+# NTP Configuration
+ansible_private_key_file: ~/.ssh/private/ansible_user_intern_carlossousa_tech
+
+ntp_servers:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+
+timezone: UTC
+
+# Services
+service_status:
+  - name: systemd-timesyncd
+    state: started
+  - name: ssh
+    state: restarted
+
+# System packages
+common_packages:
+  - btop
+  - ca-certificates
+  - curl
+  - duf
+  - fastfetch
+  - fzf
+  - git
+  - gnupg
+  - lsb-release
+  - ncdu
+  - neovim
+  - net-tools
+  - ripgrep
+  - rsync
+  - tmux
+  - unzip
+  - vim
+  - wget
+
+absent_packages: {}
+
+# Update strategy
+auto_update_enabled: false

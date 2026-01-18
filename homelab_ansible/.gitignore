@@ -1,0 +1,15 @@
+# Ignore Inventory
+inventory/hosts.yml
+
+# Ignore group_vars 
+group_vars/**/*.yml
+
+# Ignore host_vars
+host_vars/*.yml
+
+# Ignore host_vars
+host_files
+
+
+# Ignore all Secrets
+**/.env

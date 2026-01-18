@@ -1,0 +1,13 @@
+---
+- name: Setup Docker
+  include_tasks: docker.yml
+
+- name: Setup Users
+  include_tasks: users.yml
+
+- name: Setup Files
+  include_tasks: files.yml
+
+- name: Setup Docker Stack
+  include_tasks: docker_stack.yml
+

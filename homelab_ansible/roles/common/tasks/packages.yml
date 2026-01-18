@@ -1,0 +1,24 @@
+---
+- name: Update apt Cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install Common Packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ common_packages }}"
+
+- name: Remove Unnecessary Packages
+  package:
+    name:
+      - "{{ absent_packages }}"
+    state: absent
+
+- name: Update and Clean Up Packages
+  apt:
+    update_cache: yes
+    upgrade: yes
+    autoclean: yes
+    autoremove: yes

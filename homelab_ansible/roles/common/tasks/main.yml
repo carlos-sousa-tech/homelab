@@ -1,0 +1,7 @@
+---
+- name: Setup System Packages
+  include_tasks: packages.yml
+
+- name: Setup System
+  include_tasks: system.yml
+

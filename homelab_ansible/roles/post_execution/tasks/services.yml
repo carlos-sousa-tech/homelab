@@ -1,0 +1,6 @@
+---
+- name: Configure Services
+  systemd:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}" 
+  loop: "{{ service_status }}"

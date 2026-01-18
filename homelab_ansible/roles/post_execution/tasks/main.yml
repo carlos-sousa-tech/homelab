@@ -1,0 +1,6 @@
+---
+- name: Setup Security
+  include_tasks: security.yml
+
+- name: Manage Services
+  include_tasks: services.yml

@@ -1,0 +1,40 @@
+---
+- name: Create Docker Networks
+  docker_network:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_networks }}"
+
+- name: Copy Host Specific Stack
+  copy:
+    src: "{{ playbook_dir }}/host_files/{{ inventory_hostname }}/"
+    dest: "{{ docker_stack_location }}/"
+    owner: "{{ docker_main_user }}"
+    group: "{{ docker_main_group }}"
+    mode: '0644'
+    directory_mode: '0755'
+  become: true
+
+#- name: Fix Owner and Permissions (directories)
+#  file:
+#    path: "{{ docker_stack_location}}/"
+#    owner: "{{ docker_main_user }}"
+#    group: "{{ docker_main_group }}"
+#    mode: '0755'
+#    recurse: yes
+#    state: directory
+#
+#- name: Fix Owner and Permissions (files)
+#  find:
+#    path: "{{ docker_stack_location }}"
+#    type: f
+#    recurse: yes
+#  register: file_list
+#
+#- name: Apply File Permissions
+#  file:
+#    path: "{{ item.path }}"
+#    owner: "{{ docker_main_user }}"
+#    group: "{{ docker_main_group }}"
+#    mode: '0644'
+#  loop: "{{ file_list.files }}"
