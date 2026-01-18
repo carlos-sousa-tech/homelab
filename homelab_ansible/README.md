@@ -18,7 +18,7 @@
 
 - Copy your `host_files` secrets to the root directory
     - it should be ./host_files/<inventory_name>/<directory>
-    - eg: ./home_files/discovery/docker-stack/nginx-reverse-proxy
+    - eg: ./host_files/discovery/docker-stack/nginx-reverse-proxy
 
 - Copy your `host_vars` to the root directory
 
