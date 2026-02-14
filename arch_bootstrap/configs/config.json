@@ -1,0 +1,86 @@
+{
+    "setup" : {
+        "debug_mode": "false"
+    },
+    "system": {
+        "locale": "en_US.UTF-8",
+        "keyboard_layout": "de",
+        "hostname": "arch-boostrap"
+    },
+    "packages": {
+        "install": {
+            "preflight": [
+                "curl",
+                "linux",
+                "linux-firmware",
+                "linux-headers",
+                "rsync",
+                "wget"
+            ],
+            "system": [
+                "bluetui",
+                "brightnessctl",
+                "fzf",
+                "ghostty",
+                "kitty",
+                "less",
+                "neovim",
+                "networkmanager",
+                "pipewire",
+                "pipewire-pulse",
+                "power-profiles-daemon",
+                "ripgrep",
+                "tmux",
+                "vim",
+                "wireplumber"
+            ],
+            "desktop": [
+                "hypridle",
+                "hyprland",
+                "hyprland-protocols",
+                "hyprlock",
+                "kde-applications",
+                "mako",
+                "plasma-desktop",
+                "plasma-wayland-session",
+                "plasma-wayland-protocols",
+                "qt5-wayland",
+                "rofi",
+                "sddm",
+                "sddm-kcm",
+                "uwsm",
+                "waybar",
+                "wayland",
+                "wl-clipboard",
+                "xdg-desktop-portal-hyprland",
+                "xorg-server"
+            ],
+            "developer": [
+                "docker",
+                "docker-buildx",
+                "docker-compose",
+                "lazygit",
+                "zed"
+            ],
+            "media": [
+                "strawberry",
+                "vlc"
+            ],
+            "utilities": [
+                "btop",
+                "duf",
+                "fastfetch",
+                "firefox",
+                "localsend",
+                "ncdu",
+                "timeshift",
+                "tldr"
+            ],
+            "gpu": [
+                "nvidia-dkms",
+                "nvidia-utils",
+                "nvidia-settings"
+            ]
+        }
+    }
+}
