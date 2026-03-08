@@ -122,13 +122,15 @@ load_configuration(){
     mapfile -t PACKAGES_INSTALL_DEVELOPER < <(jq -r '.packages.install.developer[]' "$CONFIG_FILE")
     mapfile -t PACKAGES_INSTALL_MEDIA < <(jq -r '.packages.install.media[]' "$CONFIG_FILE")
     mapfile -t PACKAGES_INSTALL_UTILITIES < <(jq -r '.packages.install.utilities[]' "$CONFIG_FILE")
-    mapfile -t PACKAGES_INSTALL_GPU < <(jq -r '.packages.install.gpu[]' "$CONFIG_FILE")
+    mapfile -t PACKAGES_INSTALL_GPU_NVIDIA < <(jq -r '.packages.install.gpu_nvidia[]' "$CONFIG_FILE")
+    mapfile -t PACKAGES_INSTALL_GPU_AMD < <(jq -r '.packages.install.gpu_amd[]' "$CONFIG_FILE")
 
     SETUP_DEBUG_MODE=$(jq -r '.setup.debug_mode' "$CONFIG_FILE")
 
     SYSTEM_LOCALE=$(jq -r '.system.locale' "$CONFIG_FILE")
     SYSTEM_KEYBOARD_LAYOUT=$(jq -r '.system.keyboard_layout' "$CONFIG_FILE")
     SYSTEM_HOSTNAME=$(jq -r '.system.hostname' "$CONFIG_FILE")
+    SYSTEM_GPU_TYPE=$(jq -r '.system.gpu_type' "$CONFIG_FILE")
 
     log ""
 }

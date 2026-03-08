@@ -5,7 +5,8 @@
     "system": {
         "locale": "en_US.UTF-8",
         "keyboard_layout": "de",
-        "hostname": "arch-boostrap"
+        "hostname": "arch-boostrap",
+        "gpu_type": "nvidia"
     },
     "packages": {
         "install": {
@@ -76,10 +77,14 @@
                 "timeshift",
                 "tldr"
             ],
-            "gpu": [
+            "gpu_nvidia": [
                 "nvidia-dkms",
                 "nvidia-utils",
                 "nvidia-settings"
+            ],
+            "gpu_amd": [
+                "mesa",
+                "xf86-video-amdgpu"
             ]
         }
     }

@@ -179,7 +179,7 @@ swapon "$SWAP_PART"
 mount --mkdir "$EFI_PART" /mnt/boot
 
 # Determine packages
-PACKAGES="base linux linux-firmware nano vim man-db man-pages networkmanager grub efibootmgr $UCODE_PKG"
+PACKAGES="base linux linux-firmware git nano vim man-db man-pages networkmanager nmtui grub efibootmgr $UCODE_PKG"
 if [[ "$INSTALL_SSH" =~ ^[Yy]$ ]]; then
     PACKAGES="$PACKAGES openssh"
 fi

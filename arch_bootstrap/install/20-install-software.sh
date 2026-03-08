@@ -41,7 +41,16 @@ complete_package_installation(){
     install_packages PACKAGES_INSTALL_SYSTEM
 
     log_header "Installing GPU Packages"
-    install_packages PACKAGES_INSTALL_GPU
+    if [ "$SYSTEM_GPU_TYPE" = "nvidia" ]; then
+        log_header "NVIDIA selected"
+        install_packages PACKAGES_INSTALL_GPU_NVIDIA
+    elif [ "$SYSTEM_GPU_TYPE" = "amd" ]; then
+        log_header "AMD selected"
+        install_packages PACKAGES_INSTALL_GPU_AMD
+    else
+        log_header "No Match (nvidia || amd)"
+        log_header "No GPU Packages will be installed"
+    fi
 
     log_header "Installing Media Packages"
     install_packages PACKAGES_INSTALL_UTILITIES

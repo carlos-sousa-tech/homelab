@@ -1,5 +1,36 @@
 # Arch Linux Bootstraper
 
+## Useful Commands / Helpers
+
+### Set Keyboard Layout in Installation Env
+
+- Show available with `localectl list-keymaps`
+
+- Change with `loadkeys de-latin1`
+
+### No Cable, WLAN Only
+
+#### In Arch Installation step
+
+You can use `iwctl`
+
+- List Devices `device list`
+
+- Turn On if Needed `device <name> set-property Powered On`
+
+- Scan Networks `station <name> scan`
+
+- Show Networks Found `station <name> get-networks`
+
+- Connect with: `station <name> connect <SSID>`
+
+All in one go would be: `iwctl --passphrase <passphrase> station <name> connect <SSID>`
+
+
+#### In your Installation
+
+Just use `nmtui`
+
 ## Using the Auto Installer
 - Get the auto-installer to your system
     - scp: `pacman -Sy openssh` > `passwd` > `scp install_arch.sh root@ip:~/`
