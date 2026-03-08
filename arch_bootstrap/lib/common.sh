@@ -125,6 +125,8 @@ load_configuration(){
     mapfile -t PACKAGES_INSTALL_GPU_NVIDIA < <(jq -r '.packages.install.gpu_nvidia[]' "$CONFIG_FILE")
     mapfile -t PACKAGES_INSTALL_GPU_AMD < <(jq -r '.packages.install.gpu_amd[]' "$CONFIG_FILE")
 
+    mapfile -t PACKAGES_ABSENT < <(jq -r '.packages.absent[]' "$CONFIG_FILE")
+
     SETUP_DEBUG_MODE=$(jq -r '.setup.debug_mode' "$CONFIG_FILE")
 
     SYSTEM_LOCALE=$(jq -r '.system.locale' "$CONFIG_FILE")
