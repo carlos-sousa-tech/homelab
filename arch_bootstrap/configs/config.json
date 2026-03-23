@@ -33,19 +33,22 @@
                 "ripgrep",
                 "tmux",
                 "vim",
-                "wireplumber"
+                "wireplumber",
+                "zsh"
             ],
             "desktop": [
                 "hypridle",
                 "hyprland",
                 "hyprland-protocols",
                 "hyprlock",
+                "hyprpolkitagent",
                 "kde-applications",
                 "mako",
+                "monique",
                 "plasma-desktop",
                 "plasma-wayland-session",
                 "plasma-wayland-protocols",
-                "qt5-wayland",
+                "qt6-wayland",
                 "rofi",
                 "sddm",
                 "sddm-kcm",
@@ -60,6 +63,7 @@
                 "docker",
                 "docker-buildx",
                 "docker-compose",
+                "nmap",
                 "lazygit",
                 "zed"
             ],
